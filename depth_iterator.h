@@ -1,13 +1,13 @@
 #pragma once
 #include "iterator.h"
 
-class depth_iterator : public Iterator // класс depth_iterator наследник виртуального класса Iterator
+class depth_iterator : public Iterator // РєР»Р°СЃСЃ depth_iterator РЅР°СЃР»РµРґРЅРёРє РІРёСЂС‚СѓР°Р»СЊРЅРѕРіРѕ РєР»Р°СЃСЃР° Iterator
 {
 public:
 	int *head;
 	int current;
 	int size;
-	bool *visited; // пометка были ли мы уже в этом узле или нет 
+	bool *visited; // РїРѕРјРµС‚РєР° Р±С‹Р»Рё Р»Рё РјС‹ СѓР¶Рµ РІ СЌС‚РѕРј СѓР·Р»Рµ РёР»Рё РЅРµС‚ 
 
 	bool has_next() override;
 	int next() override;
