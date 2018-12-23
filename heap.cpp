@@ -15,19 +15,19 @@ Heap::~Heap()
 	size = 0;
 }
 
-bool Heap::contains(int elem) // поиск элемента в дереве по ключу
+bool Heap::contains(int elem) // РїРѕРёСЃРє СЌР»РµРјРµРЅС‚Р° РІ РґРµСЂРµРІРµ РїРѕ РєР»СЋС‡Сѓ
 {
 	if (size == 0)
 		return false;
 	for (size_t i = 0; i < size; i++)
 	{
-		if (elements[i] == elem) //поиск по значению элемента
+		if (elements[i] == elem) //РїРѕРёСЃРє РїРѕ Р·РЅР°С‡РµРЅРёСЋ СЌР»РµРјРµРЅС‚Р°
 			return true;
 	}
 	return false;
 }
 
-int Heap::at(size_t  index) // получение элемента по индексу
+int Heap::at(size_t  index) // РїРѕР»СѓС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РїРѕ РёРЅРґРµРєСЃСѓ
 {
 	if (index < 0)
 		throw out_of_range("Error");
@@ -47,26 +47,26 @@ size_t Heap::get_size()
 	return size;
 }
 
-void Heap::insert(int elem) // добавление элемента в дерево по ключу
+void Heap::insert(int elem) // РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РґРµСЂРµРІРѕ РїРѕ РєР»СЋС‡Сѓ
 {
 	if (size == 0)  
 	{
-		elements = new int[1];	// создание первого элемента
+		elements = new int[1];	// СЃРѕР·РґР°РЅРёРµ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 	}
 	else
 	{
 		int *prev = elements;  
-		elements = new int[size + 1]; // создание массива на 1 элемент больше предыдущего
-		for (size_t i = 0; i < size; i++) // перезапись массива
+		elements = new int[size + 1]; // СЃРѕР·РґР°РЅРёРµ РјР°СЃСЃРёРІР° РЅР° 1 СЌР»РµРјРµРЅС‚ Р±РѕР»СЊС€Рµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ
+		for (size_t i = 0; i < size; i++) // РїРµСЂРµР·Р°РїРёСЃСЊ РјР°СЃСЃРёРІР°
 			elements[i] = prev[i];
-		delete[] prev; // удаление старой версии
+		delete[] prev; // СѓРґР°Р»РµРЅРёРµ СЃС‚Р°СЂРѕР№ РІРµСЂСЃРёРё
 	}
 	size ++;
-	elements[size - 1] = elem; // запись нового элемента в конец массива
-	sorting(size - 1); // вызов сортировки для нового массива
+	elements[size - 1] = elem; // Р·Р°РїРёСЃСЊ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІ РєРѕРЅРµС† РјР°СЃСЃРёРІР°
+	sorting(size - 1); // РІС‹Р·РѕРІ СЃРѕСЂС‚РёСЂРѕРІРєРё РґР»СЏ РЅРѕРІРѕРіРѕ РјР°СЃСЃРёРІР°
 }
 
-void Heap::remove(int elem) // удаление элемента дерева по ключу
+void Heap::remove(int elem) // СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РґРµСЂРµРІР° РїРѕ РєР»СЋС‡Сѓ
 {
 	if (size == 0)
 		return;
@@ -88,20 +88,20 @@ void Heap::remove(int elem) // удаление элемента дерева по ключу
 			/*int help_elem = elements[index];
 			elements[index] = elements[size - 1];
 			elements[size - 1] = help_elem;*/
-		swap(elements[index], elements[size - 1]); // перенос элемента, который хотим удалить на последнее место 
+		swap(elements[index], elements[size - 1]); // РїРµСЂРµРЅРѕСЃ СЌР»РµРјРµРЅС‚Р°, РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёРј СѓРґР°Р»РёС‚СЊ РЅР° РїРѕСЃР»РµРґРЅРµРµ РјРµСЃС‚Рѕ 
 	size--;
 	/*for (int i = size - 1; i >= index; i--)
 		sorting(i);*/
-	int *prev = elements; // сздаем новый массив размера на 1 меньше
+	int *prev = elements; // СЃР·РґР°РµРј РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ СЂР°Р·РјРµСЂР° РЅР° 1 РјРµРЅСЊС€Рµ
 	elements = new int[size];
-	for (size_t i = 0; i < size; i++) // перезаписываем старый массив в новый
+	for (size_t i = 0; i < size; i++) // РїРµСЂРµР·Р°РїРёСЃС‹РІР°РµРј СЃС‚Р°СЂС‹Р№ РјР°СЃСЃРёРІ РІ РЅРѕРІС‹Р№
 		elements[i] = prev[i];
 	delete[] prev;
-	for (size_t  i = 0; i < size; i++) // сортируем новый массив
+	for (size_t  i = 0; i < size; i++) // СЃРѕСЂС‚РёСЂСѓРµРј РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ
 		sorting(i);
 }
 
-int Heap::get_index(int elem) // получение индекса элемента по ключу
+int Heap::get_index(int elem) // РїРѕР»СѓС‡РµРЅРёРµ РёРЅРґРµРєСЃР° СЌР»РµРјРµРЅС‚Р° РїРѕ РєР»СЋС‡Сѓ
 {
 	if (size == 0)
 		throw out_of_range("Heap is empty");
@@ -111,7 +111,7 @@ int Heap::get_index(int elem) // получение индекса элемента по ключу
 	throw out_of_range("Elem missing");
 }
 
-void Heap::sorting(int index) //сортировка
+void Heap::sorting(int index) //СЃРѕСЂС‚РёСЂРѕРІРєР°
 {
 	if (elements[index] > elements[(index - 1) / 2])
 	{
@@ -123,7 +123,7 @@ void Heap::sorting(int index) //сортировка
 	}
 }
 
-Iterator* Heap::create_width_iterator() // обход в ширину 
+Iterator* Heap::create_width_iterator() // РѕР±С…РѕРґ РІ С€РёСЂРёРЅСѓ 
 {
 	width_iterator* t = new width_iterator;
 	t->head = &(elements[0]); 
@@ -132,7 +132,7 @@ Iterator* Heap::create_width_iterator() // обход в ширину
 	return t;
 }
 
-Iterator* Heap::create_depth_iterator()  // обход в глубину
+Iterator* Heap::create_depth_iterator()  // РѕР±С…РѕРґ РІ РіР»СѓР±РёРЅСѓ
 {
 	depth_iterator* t = new depth_iterator;
 	t->head = &(elements[0]);
@@ -149,24 +149,24 @@ void Heap::print_complete()
 	if (size == 0)
 		throw out_of_range("Heap is empty");
 	system("cls");
-	int len = 25; // длина ветвей первых потомков корня 
-	int x = 60; // координата, где будет находится корень нашей кучи на экране (от левого края экрана в ширину)
-	int y = 1; // то же самое, только в высоту (от верхнего края)
-	int cur = 0; // индекс, начиная с которого производится вывод 
+	int len = 25; // РґР»РёРЅР° РІРµС‚РІРµР№ РїРµСЂРІС‹С… РїРѕС‚РѕРјРєРѕРІ РєРѕСЂРЅСЏ 
+	int x = 60; // РєРѕРѕСЂРґРёРЅР°С‚Р°, РіРґРµ Р±СѓРґРµС‚ РЅР°С…РѕРґРёС‚СЃСЏ РєРѕСЂРµРЅСЊ РЅР°С€РµР№ РєСѓС‡Рё РЅР° СЌРєСЂР°РЅРµ (РѕС‚ Р»РµРІРѕРіРѕ РєСЂР°СЏ СЌРєСЂР°РЅР° РІ С€РёСЂРёРЅСѓ)
+	int y = 1; // С‚Рѕ Р¶Рµ СЃР°РјРѕРµ, С‚РѕР»СЊРєРѕ РІ РІС‹СЃРѕС‚Сѓ (РѕС‚ РІРµСЂС…РЅРµРіРѕ РєСЂР°СЏ)
+	int cur = 0; // РёРЅРґРµРєСЃ, РЅР°С‡РёРЅР°СЏ СЃ РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РІС‹РІРѕРґ 
 	print_rec(len, x, y, cur);
 }
-
+/*
 void Heap::printf()
 {
 	int *t = &(elements[0]);
 	for (int i = 0; i < size; i++)
 		cout << t[i]<<' ';
-}
+}*/
 
 
 void Heap::print_rec(int len, int x, int y, int cur)
 {
-	gotoxy(x - len, y); // функция, помещающая курсор в точку с координатами (х,у)
+	gotoxy(x - len, y); // С„СѓРЅРєС†РёСЏ, РїРѕРјРµС‰Р°СЋС‰Р°СЏ РєСѓСЂСЃРѕСЂ РІ С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё (С…,Сѓ)
 	if (cur * 2 + 1 < size)
 		for (int i = 0; i < len; i++)
 			cout << '_';
@@ -180,9 +180,9 @@ void Heap::print_rec(int len, int x, int y, int cur)
 	else
 		for (int i = 0; i < len; i++)
 			cout << ' ';
-	if (cur * 2 + 1 < size) // если имеется левый потомок продолжаем рисовать красивый вывод
+	if (cur * 2 + 1 < size) // РµСЃР»Рё РёРјРµРµС‚СЃСЏ Р»РµРІС‹Р№ РїРѕС‚РѕРјРѕРє РїСЂРѕРґРѕР»Р¶Р°РµРј СЂРёСЃРѕРІР°С‚СЊ РєСЂР°СЃРёРІС‹Р№ РІС‹РІРѕРґ
 		print_rec(len / 2, x - len, y + 1, cur * 2 + 1);
-	if (cur * 2 + 2 < size)// если имеется правый потомок продолжаем рисовать красивый вывод
+	if (cur * 2 + 2 < size)// РµСЃР»Рё РёРјРµРµС‚СЃСЏ РїСЂР°РІС‹Р№ РїРѕС‚РѕРјРѕРє РїСЂРѕРґРѕР»Р¶Р°РµРј СЂРёСЃРѕРІР°С‚СЊ РєСЂР°СЃРёРІС‹Р№ РІС‹РІРѕРґ
 		print_rec(len / 2, x + len, y + 1, cur * 2 + 2);
 }
 
