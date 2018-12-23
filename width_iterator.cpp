@@ -2,14 +2,14 @@
 #include "width_iterator.h"
 
 
-int width_iterator::next() // возвращает ключ
+int width_iterator::next() // РІРѕР·РІСЂР°С‰Р°РµС‚ РєР»СЋС‡
 {
 	int elem = head[current];
 	current ++;
 	return elem;
 }
 
-bool width_iterator::has_next() // проверка: во всех ли узлах мы были
+bool width_iterator::has_next() // РїСЂРѕРІРµСЂРєР°: РІРѕ РІСЃРµС… Р»Рё СѓР·Р»Р°С… РјС‹ Р±С‹Р»Рё
 {
 	if (current != size) 
 		return true;
