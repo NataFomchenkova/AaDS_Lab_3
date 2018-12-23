@@ -3,9 +3,9 @@
 
 
 
-bool depth_iterator::has_next() // проверка: были ли во всех
+bool depth_iterator::has_next() // РїСЂРѕРІРµСЂРєР°: Р±С‹Р»Рё Р»Рё РІРѕ РІСЃРµС…
 {
-	for (size_t i = 0; i < size; i++) // если есть непосещенные узлы, работаем дальше
+	for (size_t i = 0; i < size; i++) // РµСЃР»Рё РµСЃС‚СЊ РЅРµРїРѕСЃРµС‰РµРЅРЅС‹Рµ СѓР·Р»С‹, СЂР°Р±РѕС‚Р°РµРј РґР°Р»СЊС€Рµ
 		if (visited[i] == false)
 			return true;
 	return false;
@@ -16,23 +16,23 @@ int depth_iterator::next()
 	int elem = head[current];
 	while (true)
 	{
-		if (current * 2 + 1 < size) // обход в глубину по левым потомкам 
+		if (current * 2 + 1 < size) // РѕР±С…РѕРґ РІ РіР»СѓР±РёРЅСѓ РїРѕ Р»РµРІС‹Рј РїРѕС‚РѕРјРєР°Рј 
 			if (visited[current * 2 + 1] == false)
 			{
 				visited[current] = true;
 				current = current * 2 + 1;
 				return elem;
 			}
-		if (current * 2 + 2 < size) // обход в глубину по правым потомкам 
+		if (current * 2 + 2 < size) // РѕР±С…РѕРґ РІ РіР»СѓР±РёРЅСѓ РїРѕ РїСЂР°РІС‹Рј РїРѕС‚РѕРјРєР°Рј 
 			if (visited[current * 2 + 2] == false)
 			{
 				visited[current] = true;
 				current = current * 2 + 2;
 				return elem;
 			}
-		visited[current] = true; // отмечаем узел, чьих потомков посещали, как пройденный
+		visited[current] = true; // РѕС‚РјРµС‡Р°РµРј СѓР·РµР», С‡СЊРёС… РїРѕС‚РѕРјРєРѕРІ РїРѕСЃРµС‰Р°Р»Рё, РєР°Рє РїСЂРѕР№РґРµРЅРЅС‹Р№
 		if (!(has_next())) 
-			return head[current]; // возвращаем узел, чьих потомков посещали
-		current = (current - 1) / 2; // поднимаемя на один уровень вверх 
+			return head[current]; // РІРѕР·РІСЂР°С‰Р°РµРј СѓР·РµР», С‡СЊРёС… РїРѕС‚РѕРјРєРѕРІ РїРѕСЃРµС‰Р°Р»Рё
+		current = (current - 1) / 2; // РїРѕРґРЅРёРјР°РµРјСЏ РЅР° РѕРґРёРЅ СѓСЂРѕРІРµРЅСЊ РІРІРµСЂС… 
 	}
 }
