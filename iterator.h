@@ -5,6 +5,6 @@ class Iterator
 {
 public:
 
-	virtual bool has_next() = 0; // есть ли еще необойденный элемент
-	virtual int next() = 0; // обход
+	virtual bool has_next() = 0; // РµСЃС‚СЊ Р»Рё РµС‰Рµ РЅРµРѕР±РѕР№РґРµРЅРЅС‹Р№ СЌР»РµРјРµРЅС‚
+	virtual int next() = 0; // РѕР±С…РѕРґ
 };
