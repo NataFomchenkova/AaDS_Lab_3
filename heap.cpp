@@ -70,28 +70,13 @@ void Heap::remove(int elem) // удаление элемента дерева п
 {
 	if (size == 0)
 		return;
-	/*bool temp = false;
-	int index = -1;*/
 	int	index = 0;
 	while (elements[index] != elem && index < size)
 		index++;
 	if (index == size)
 		throw out_of_range("There is no such elem in tne heap"); 
-		/*for (size_t i = 0;temp == false, i < size; i++)
-		{
-			if (elements[temp] == elem)
-				temp = true;
-			index++;
-		}*/
-		/*if (temp == false)
-			throw out_of_range("There is no such elem in tne heap");*/
-			/*int help_elem = elements[index];
-			elements[index] = elements[size - 1];
-			elements[size - 1] = help_elem;*/
 		swap(elements[index], elements[size - 1]); // перенос элемента, который хотим удалить на последнее место 
 	size--;
-	/*for (int i = size - 1; i >= index; i--)
-		sorting(i);*/
 	int *prev = elements; // сздаем новый массив размера на 1 меньше
 	elements = new int[size];
 	for (size_t i = 0; i < size; i++) // перезаписываем старый массив в новый
@@ -115,9 +100,6 @@ void Heap::sorting(int index) //сортировка
 {
 	if (elements[index] > elements[(index - 1) / 2])
 	{
-		/*int help_var = elements[index];
-		elements[index] = elements[(index - 1) / 2];
-		elements[(index - 1) / 2] = help_var;*/
 		swap(elements[index], elements[(index - 1) / 2]); 
 		sorting((index - 1) / 2);
 	}
@@ -155,14 +137,6 @@ void Heap::print_complete()
 	int cur = 0; // индекс, начиная с которого производится вывод 
 	print_rec(len, x, y, cur);
 }
-/*
-void Heap::printf()
-{
-	int *t = &(elements[0]);
-	for (int i = 0; i < size; i++)
-		cout << t[i]<<' ';
-}*/
-
 
 void Heap::print_rec(int len, int x, int y, int cur)
 {
@@ -185,16 +159,3 @@ void Heap::print_rec(int len, int x, int y, int cur)
 	if (cur * 2 + 2 < size)// если имеется правый потомок продолжаем рисовать красивый вывод
 		print_rec(len / 2, x + len, y + 1, cur * 2 + 2);
 }
-
-/*
-bool Heap::is_equal(int *array1, const size_t size_array1, int *array2, const size_t size_array2)
-{
-
-	if (size_array1 != size_array2) return false;
-	for (size_t i = 0; i<size_array1; i++)
-	{
-		if (array2[i] != array1[i])
-			return false;
-	}
-	return true;
-}*/
