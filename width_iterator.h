@@ -1,7 +1,7 @@
 #pragma once
 #include "iterator.h"
 
-class width_iterator : public Iterator  // класс width_iterator наследник виртуального класса Iterator
+class width_iterator : public Iterator  // РєР»Р°СЃСЃ width_iterator РЅР°СЃР»РµРґРЅРёРє РІРёСЂС‚СѓР°Р»СЊРЅРѕРіРѕ РєР»Р°СЃСЃР° Iterator
 {
 public:
 
